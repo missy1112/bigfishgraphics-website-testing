@@ -78,3 +78,18 @@ def test_graphic_design_page_has_service_content():
 
     finally:
         driver.quit()
+
+def test_about_page_has_about_content():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+    try:
+        driver.get("https://bigfishgraphics.co.za/about-us")
+
+        page_source = driver.page_source.lower()
+
+        assert "about" in page_source
+        assert "bigfish" in page_source
+        assert "design" in page_source or "website" in page_source or "graphics" in page_source
+
+    finally:
+        driver.quit()
