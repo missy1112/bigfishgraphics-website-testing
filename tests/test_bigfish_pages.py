@@ -32,3 +32,19 @@ def test_bigfish_pages_load_successfully(url):
 
     finally:
         driver.quit()
+
+def test_homepage_has_main_content():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+    try:
+        driver.get("https://bigfishgraphics.co.za")
+
+        page_source = driver.page_source.lower()
+
+        assert "bigfish" in page_source
+        assert "graphic" in page_source
+        assert "design" in page_source
+        assert "website" in page_source
+
+    finally:
+        driver.quit()
