@@ -48,3 +48,18 @@ def test_homepage_has_main_content():
 
     finally:
         driver.quit()
+
+def test_contact_page_has_contact_content():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+    try:
+        driver.get("https://bigfishgraphics.co.za/contact-us")
+
+        page_source = driver.page_source.lower()
+
+        assert "contact" in page_source
+        assert "bigfish" in page_source
+        assert "email" in page_source or "phone" in page_source or "whatsapp" in page_source
+
+    finally:
+        driver.quit()
